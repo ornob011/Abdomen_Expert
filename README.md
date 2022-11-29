@@ -56,7 +56,7 @@ Each image was individually classified into its class and added to a CSV file (c
 
 # Model Learning
 ![Learning pipeline of the  proposed model](images/Pipeline.png)
-<p align="justify">
+<p align="center">
 Fig. 01: Learning pipeline of the  proposed model
 </p>
 </br>
@@ -114,7 +114,7 @@ Fig. 03: ROC AUC Curve </p>
 A confusion matrix gathers the anticipated results of a classification issue. The amount of accurate and incorrect predictions for every class is expressed using count values. Fig. 05 displays the confusion matrix derived from the test set prediction. </p></br>
 
 ![Confusion Matrix](images/confusion_matrix.png)
-<p align="justify">
+<p align="center">
 Fig. 04: Confusion Matrix </p>
 </br>
 </br>
