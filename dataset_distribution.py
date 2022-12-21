@@ -6,38 +6,34 @@ import optparse
 from dataset_distribution import train_test_file
 
 
-def dataset_distribution(train_df):
-    sns.set_style("darkgrid")
-    anchor_images = train_df['Anchor']
+def dataset_distribution_for_training(train_df):
+#     sns.set_style("darkgrid")
+#     images = train_df['ID']
+    images = []
+    label_cols = ['Kidney Cyst', 'Kidney Stone', 'Kidney Tumour',
+                   'Liver Tumour', 'Adenocarcinoma (Lung Cancer)', 'Benign (Lung Cancer)',
+                   'Large Carcinoma (Lung Cancer)', 'Squamous Carcinoma (Lung Cancer)', 'Stomach Cancer',
+                   'Normal']
+    
     labels = []
-
-    count_covid = 0
-    count_noncovid = 0
-    count_cap = 0
-    for i in anchor_images:
-        y = np.unique(train_df[train_df['Anchor'] == str(i)]['Label'])
-        if (y[0] == 1):
-            labels.append("NonCOVID")
-            count_noncovid += 1
-        elif (y[0] == 2):
-            labels.append("COVID")
-            count_covid += 1
-        elif (y[0] == 3):
-            labels.append("CAP")
-            count_cap += 1
-
-    labels = np.array(labels)
-
-    print("Covid Count = {0}\nNonCovid Count = {1}\nCommunity Acquired Pneumonia Count = {2}".format(
-        count_covid, count_noncovid, count_cap))
-
-    dataset = pd.DataFrame(labels, anchor_images)
-    dataset = dataset.set_axis(
-        [*dataset.columns[:-1], 'Label'], axis=1, inplace=False)
-
-    plt.figure(figsize=(11.69, 8.27))
-    ax = sns.countplot(x='Label', data=dataset, palette="Set2")
-
+    
+    for i in label_cols:
+        count = train_df[i].sum()
+        labels.append(count)
+    
+    dataset = {'Kidney Cyst':labels[0], 'Kidney Stone':labels[1], 'Kidney Tumour':labels[2],
+            'Liver Tumour':labels[3], 'Adenocarcinoma (Lung Cancer)':labels[4], 'Benign (Lung Cancer)':labels[5], 
+            'Large Carcinoma (Lung Cancer)':labels[6], 'Squamous Carcinoma (Lung Cancer)':labels[7], 'Stomach Cancer':labels[8], 
+            'Normal':labels[9]}
+    
+    classes = list(dataset.keys())
+    values = list(dataset.values())
+    
+    dataset = pd.DataFrame(dataset, index=[0])
+    
+    plt.figure(figsize=(20,10))
+    sns.barplot(data=dataset)  
+    
 
 if __name__ == '__main__':
 
