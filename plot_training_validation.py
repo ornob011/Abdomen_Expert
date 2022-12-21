@@ -1,7 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from train_cnn import train_cnn
-
 
 def show_results(history):
     accuracy = [res['train_acc'] for res in history]
@@ -27,8 +25,3 @@ def show_results(history):
 
     fig.show()
     plt.savefig('Training_vs_Validation.png', dpi=600)
-
-
-if __name__ == '__main__':
-    res, foldperf = train_cnn()
-    show_results(res)
